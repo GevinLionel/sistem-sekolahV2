@@ -6,38 +6,45 @@ use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
-      public function index()
+    
+    public function index()
     {
-        return 'Showing major list';
+        return "Menampilkan halaman daftar major";
     }
 
-    public function show(string $id)
-    {
-        return "Show major detail with ID: $id";
-    }
-
+    
     public function create()
     {
-        return "this is the page to create a new major";
+        return "Menampilkan halaman tambah major";
     }
 
+    
+    public function store(Request $request)
+    {
+        return "Melakukan penambahan data major";
+    }
+
+    
+    public function show(string $id)
+    {
+        return "Menampilkan major dangan ID: {$id}";
+    }
+
+    
     public function edit(string $id)
     {
-        return "this is the page to edit majors with ID: $id";
+        return "Menampilkan halaman edit siswa dengan ID: {$id}";
     }
 
-    public function update(string $id)
+    
+    public function update(Request $request, string $id)
     {
-        return "updating majors with ID: $id";
+        return "Melakukan perubahan data majo dengan ID: {$id}";
     }
 
+    
     public function destroy(string $id)
     {
-        return "deleting majors with ID: $id";
-    }
-
-    public function store()
-    {
-        return "storing new major";
+        return "Menghapus data siswa dengan ID: {$id}";
     }
 }

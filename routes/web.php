@@ -10,6 +10,7 @@ use App\Http\Controllers\SchoolClass\UpdateController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\MajorController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -60,7 +61,9 @@ Route::name('teachers.')->prefix('teachers')->group(function () {
 
 });
 //---------------------------------------------------------------------------------------------------------------------------------//(School Classes)
-Route::name('SchoolClasses.')->prefix('School-Classes')->group(function () {
+Route::name('classes.')->prefix('classes')->group(function () {
+
+    //page
 
     Route::get('/', [IndexController::class, 'index'])->name('index');
 
@@ -69,6 +72,8 @@ Route::name('SchoolClasses.')->prefix('School-Classes')->group(function () {
     Route::get('/create', [CreateController::class, 'create'])->name('create');
 
     Route::get('/{id}/edit', [EditController::class, 'edit'])->name('edit');
+
+    //logic
 
     Route::delete('/{id}/destroy', [DestroyController::class, 'delete'])->name('destroy');
 
@@ -79,23 +84,7 @@ Route::name('SchoolClasses.')->prefix('School-Classes')->group(function () {
 });
 
 //---------------------------------------------------------------------------------------------------------------------------------//(Major)
-Route::name('majors.')->prefix('majors')->group(function () {
-
-    Route::get('/', [MajorController::class, 'index'])->name('index');
-
-    Route::get('/{id}', [MajorController::class, 'show'])->name('show');
-
-    Route::get('/create', [MajorController::class, 'create'])->name('create');
-
-    Route::get('/{id}/edit', [MajorController::class, 'edit'])->name('edit');
-
-    Route::delete('/{id}/destroy', [MajorController::class, 'destroy'])->name('destroy');
-
-    Route::put('/{id}/update', [MajorController::class, 'update'])->name('update');
-    
-    Route::post('/store', [MajorController::class, 'store'])->name('store');
-
-});
+    Route::resource('majors', MajorController::class);
 
 
 // Route::get('/students/{id}', function ($id) {
