@@ -1,5 +1,4 @@
- 
- @extends('layout.app')
+@extends('layout.app')
 
  @section('title', $title)
  
@@ -11,13 +10,13 @@
 
                 <p class="mb-1 text-[11px] uppercase tracking-[0.2em] text-[#A16207]">Tahun Ajaran 2025/2026</p>
 
-                <h1 class="font-display text-3xl font-semibold text-[#16213A]">Daftar Siswa</h1>
+                <h1 class="font-display text-3xl font-semibold text-[#16213A]">Daftar Kelas</h1>
 
             </div>
 
-            <a href="{{ route('students.create') }}" class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
+            <a href="{{ route('classes.create') }}" class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
 
-            Catat Siswa Baru
+            Catat Kelas Baru
 
             </a>
 
@@ -35,13 +34,13 @@
 
                         <th class="w-14 px-5 py-3.5 font-semibold">No.</th>
 
-                        <th class="px-5 py-3.5 font-semibold">NIS</th>
+                        <th class="px-5 py-3.5 font-semibold">Nama Kelas</th>
 
-                        <th class="px-5 py-3.5 font-semibold">Nama Siswa</th>
-
-                        <th class="px-5 py-3.5 font-semibold">Kelas</th>
+                        <th class="px-5 py-3.5 font-semibold">Tingkat</th>
 
                         <th class="px-5 py-3.5 font-semibold">Jurusan</th>
+
+                        <th class="px-5 py-3.5 font-semibold">Wali Kelas</th>
 
                         <th class="px-5 py-3.5 text-right font-semibold">Tindakan</th>
 
@@ -51,7 +50,7 @@
 
                 <tbody>
 
-                @foreach ($students as $student)
+                @foreach ($classes as $class)
 
                     <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
 
@@ -59,32 +58,32 @@
                             {{ $loop->iteration }}
                         </td>
 
-                        <td class="px-5 py-4 font-mono text-xs text-slate-500">
-                            {{ $student['nis'] }}
-                        </td>
-
                         <td class="px-5 py-4 font-medium text-[#16213A]">
-                            {{ $student['name'] }}
+                            {{ $class['name'] }}
                         </td>
 
                         <td class="px-5 py-4">
-                            {{ $student['class'] }}
+                            {{ $class['grade'] }}
                         </td>
 
                         <td class="px-5 py-4">
-                            {{ $student['major'] }}
+                            {{ $class['major'] }}
+                        </td>
+
+                        <td class="px-5 py-4">
+                            {{ $class['homeroom_teacher'] }}
                         </td>
 
                         <td class="px-5 py-4">
 
                             <div class="flex justify-end gap-4 text-xs font-medium">
 
-                                <a href="{{ route('students.show', $student['id']) }}" class="text-[#16213A] hover:text-[#A16207]">Lihat</a>
+                                <a href="{{ route('classes.show', $class['id']) }}" class="text-[#16213A] hover:text-[#A16207]">Lihat</a>
 
-                                <a href="{{ route('students.edit', $student['id']) }}" class="text-[#16213A] hover:text-[#A16207]">Ubah</a>
+                                <a href="{{ route('classes.edit', $class['id']) }}" class="text-[#16213A] hover:text-[#A16207]">Ubah</a>
 
-                                <form action="{{ route('students.destroy', $student['id']) }}" method="POST"
-                                    onsubmit="return confirm('Hapus data siswa ini dari buku induk?')">
+                                <form action="{{ route('classes.destroy', $class['id']) }}" method="POST"
+                                    onsubmit="return confirm('Hapus data kelas ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-700 hover:text-red-900">Hapus</button>
@@ -104,5 +103,3 @@
 
         </div>
  @endsection
-
- 

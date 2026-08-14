@@ -23,11 +23,11 @@ Route::name('students.')->prefix('students')->group(function () {
 
     Route::get('/', [StudentController::class, 'index'])->name('index');
 
-    Route::get('/{id}', [StudentController::class, 'show'])->name('show');
-
     Route::get('/create', [StudentController::class, 'create'])->name('create');
 
     Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('edit');
+
+    Route::get('/{id}', [StudentController::class, 'show'])->name('show');
 
     //logic
 
@@ -40,16 +40,16 @@ Route::name('students.')->prefix('students')->group(function () {
 });
 //---------------------------------------------------------------------------------------------------------------------------------//(Teachers)
 Route::name('teachers.')->prefix('teachers')->group(function () {
-
+    
     //page
 
     Route::get('/', [TeacherController::class, 'index'])->name('index');
 
-    Route::get('/{id}', [TeacherController::class, 'show'])->name('show');
-
     Route::get('/create', [TeacherController::class, 'create'])->name('create');
 
     Route::get('/{id}/edit', [TeacherController::class, 'edit'])->name('edit');
+
+    Route::get('/{id}', [TeacherController::class, 'show'])->name('show');
 
     //logic
 
@@ -62,24 +62,24 @@ Route::name('teachers.')->prefix('teachers')->group(function () {
 });
 //---------------------------------------------------------------------------------------------------------------------------------//(School Classes)
 Route::name('classes.')->prefix('classes')->group(function () {
-
+    
     //page
 
     Route::get('/', [IndexController::class, 'index'])->name('index');
-
-    Route::get('/{id}', [ShowController::class, 'show'])->name('show');
 
     Route::get('/create', [CreateController::class, 'create'])->name('create');
 
     Route::get('/{id}/edit', [EditController::class, 'edit'])->name('edit');
 
+     Route::get('/{id}', [ShowController::class, 'show'])->name('show');
+
     //logic
 
-    Route::delete('/{id}/destroy', [DestroyController::class, 'delete'])->name('destroy');
+    Route::put('/{id}', [UpdateController::class, 'update'])->name('update');
 
-    Route::put('/{id}/update', [UpdateController::class, 'update'])->name('update');
+    Route::delete('/{id}', [DestroyController::class, 'destroy'])->name('destroy');
 
-    Route::post('/store', [StoreController::class, 'store'])->name('store');
+    Route::post('/', [StoreController::class, 'store'])->name('store');
 
 });
 

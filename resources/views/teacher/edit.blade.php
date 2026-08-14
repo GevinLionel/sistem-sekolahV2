@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('layout.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubah Data Siswa - Sistem Sekolah</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
+@section('title', $title)
 
-<body class="flex min-h-screen flex-col bg-[#F7F6F2] text-slate-700">
-
-    {{-- Header Start--}}
-    @include('layout.partials.header')
-    {{-- Header End --}}
-
-    {{-- Content Start --}}
+@section('content')
     <main class="mx-auto w-full max-w-2xl flex-1 px-6 py-10">
 
         <div class="mb-8 border-b border-[#E5E3DB] pb-5">
@@ -79,11 +67,4 @@
         </form>
 
     </main>
-
-    {{-- Footer Start --}}
-    @include('layout.partials.footer')
-    {{-- Footer End --}}
-
-</body>
-
-</html>
+@endsection

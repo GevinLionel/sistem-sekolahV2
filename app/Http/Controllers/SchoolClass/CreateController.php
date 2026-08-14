@@ -10,8 +10,49 @@ class CreateController extends Controller
     /**
      * Handle the incoming request.
      */
-   public function create()
-    {
-        return "this is the page to create a new Class";
+
+
+    public function index()
+        {
+            $title = 'Sistem Sekolah - Daftar Kelas';
+            $classes = [
+
+            [
+
+            'id' => 1,
+
+            'name' => 'XII AKL 1',
+
+            'grade' => 'XII',
+
+            'major' => 'AKL',
+
+            'homeroom_teacher' => 'Budi Santoso'
+
+            ],
+
+            [
+
+            'id' => 2,
+
+            'name' => 'XII TKJ 1',
+
+            'grade' => 'XII',
+
+            'major' => 'TKJ',
+
+            'homeroom_teacher' => 'Siti Aminah'
+
+            ]
+
+];
+
+            return view('classes.index', [
+                'title' => $title,
+                'classes' => $classes,
+            ]);
     }
+
 }
+
+
