@@ -10,52 +10,33 @@ class TeacherController extends Controller
     {
         $title = 'Sistem Sekolah - Daftar Guru';
         $teachers = [
-
             [
-
-            'id' => 1,
-
-            'nip' => '198501012024',
-
-            'name' => 'Budi Santoso',
-
-            'gender' => 'Laki-Laki',
-
-            'subject' => 'Akuntansi Dasar',
-
-            'phone' => '081234560001',
-
-            'status' => 'Aktif',
-
+                'id' => 1,
+                'nip' => '198501012024',
+                'name' => 'Budi Santoso',
+                'gender' => 'Laki-Laki',
+                'subject' => 'Akuntansi Dasar',
+                'phone' => '081234560001',
+                'status' => 'Aktif',
             ],
-
             [
+                'id' => 2,
+                'nip' => '198703152024',
+                'name' => 'Siti Aminah',
+                'gender' => 'Perempuan',
+                'subject' => 'Jaringan Komputer',
+                'phone' => '081234560002',
+                'status' => 'Aktif',
+            ],
+        ];
 
-            'id' => 2,
-
-            'nip' => '198703152024',
-
-            'name' => 'Siti Aminah',
-
-            'gender' => 'Perempuan',
-
-            'subject' => 'Jaringan Komputer',
-
-            'phone' => '081234560002',
-
-            'status' => 'Aktif',
-
-            ]
-
-            ];
-
-            return view('teacher.index', [
+        return view('teacher.index', [
             'title' => $title,
-            'teachers' => $teachers
+            'teachers' => $teachers,
         ]);
     }
 
-     public function show(string $id)
+    public function show(string $id)
     {
         $title = 'Sistem Sekolah - Detail Guru';
 
@@ -95,12 +76,11 @@ class TeacherController extends Controller
         return view('teacher.create', [
             'title' => $title,
         ]);
-        
     }
 
     public function edit(string $id)
     {
-        $title = 'Sistem Sekolah - Detail Guru';
+        $title = 'Sistem Sekolah - Edit Guru';
 
         $teachers = [
             [
@@ -125,7 +105,7 @@ class TeacherController extends Controller
 
         $teacher = collect($teachers)->firstWhere('id', (int) $id);
 
-        return view('teacher.show', [
+        return view('teacher.edit', [
             'title' => $title,
             'teacher' => $teacher,
         ]);
@@ -133,7 +113,6 @@ class TeacherController extends Controller
 
     public function update(string $id)
     {
-        $title = 'Sistem Sekolah - Edit Guru';
         return "updating teachers with ID: $id";
     }
 
@@ -144,21 +123,20 @@ class TeacherController extends Controller
     }
 
     public function store(Request $request)
-{
-    $title = "Sistem Sekolah - Menambah";
+    {
+        $title = "Sistem Sekolah - Menambah";
 
-    $validated = $request->validate([
-        'nip' => 'required|string|max:20',
-        'name' => 'required|string|max:255',
-        'gender' => 'required|in:L,P',
-        'subject' => 'required|string|max:255',
-        'phone' => 'required|string|max:20',
-        'status' => 'required|in:Aktif,Tidak Aktif',
-    ]);
+        $validated = $request->validate([
+            'nip' => 'required|string|max:20',
+            'name' => 'required|string|max:255',
+            'gender' => 'required|in:Laki-Laki,Perempuan',
+            'subject' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'status' => 'required|in:Aktif,Tidak Aktif',
+        ]);
 
-    // TODO: persist $validated somewhere real (see note below)
+        // TODO: persist $validated somewhere real (see note below)
 
-    return redirect()->route('teachers.index')->with('success', 'Guru berhasil ditambahkan.');
-}
-
+        return redirect()->route('teachers.index')->with('success', 'Guru berhasil ditambahkan.');
+    }
 }

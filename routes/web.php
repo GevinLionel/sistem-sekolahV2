@@ -67,7 +67,7 @@ Route::name('classes.')->prefix('classes')->group(function () {
 
     Route::get('/', [IndexController::class, 'index'])->name('index');
 
-    Route::get('/create', [CreateController::class, 'create'])->name('create');
+    Route::get('/create', [CreateController::class, 'create'])->name('create'); // <-- changed
 
     Route::get('/{id}/edit', [EditController::class, 'edit'])->name('edit');
 

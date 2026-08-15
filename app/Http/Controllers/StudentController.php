@@ -127,8 +127,12 @@ class StudentController extends Controller
 
     public function update(string $id)
     {
-        $title = 'Sistem Sekolah - Edit Siswa';
         return "updating students with ID: $id";
+
+        return view('students.update', [
+            'title' => $title,
+            'student' => $student,
+        ]);
     }
 
     public function destroy(string $id)

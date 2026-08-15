@@ -12,6 +12,11 @@ class UpdateController extends Controller
      */
     public function update(string $id)
     {
-        return "updating Class with ID: $id";
+        return "updating class with ID: $id";
+        
+        return view('classes.update', [
+            'title' => $title,
+            'class' => $class,
+        ]);
     }
 }
