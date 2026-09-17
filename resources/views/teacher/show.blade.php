@@ -39,7 +39,7 @@
                 </div>
                 <div class="flex justify-between px-8 py-4">
                     <dt class="uppercase tracking-[0.1em] text-xs text-slate-400">No. HP</dt>
-                    <dd class="font-medium text-[#16213A]">{{ $teacher['phone'] }}</dd>
+                    <dd class="font-medium text-[#16213A]">{{ $teacher['phone_number'] }}</dd>
                 </div>
                 <div class="flex justify-between px-8 py-4">
                     <dt class="uppercase tracking-[0.1em] text-xs text-slate-400">Status</dt>

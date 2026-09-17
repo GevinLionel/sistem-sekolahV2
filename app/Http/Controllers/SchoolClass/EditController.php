@@ -13,35 +13,44 @@ class EditController extends Controller
     public function edit(string $id)
     {
         $title = 'Sistem Sekolah - Edit kelas';
+        $majors = [
+            ['id' => 1, 'code' => 'AKL', 'name' => 'Akuntansi dan Keuangan Lembaga'],
+            ['id' => 2, 'code' => 'TKJ', 'name' => 'Teknik Komputer dan Jaringan'],
+            ['id' => 3, 'code' => 'BD', 'name' => 'Bisnis Digital'],
+        ];
+        $teachers = [
+            ['id' => 1, 'name' => 'Budi Santoso'],
+            ['id' => 2, 'name' => 'Siti Aminah'],
+        ];
 
         $classes = [
             [
                 'id' => 1,
                 'name' => 'XII AKL 1',
                 'grade' => 'XII',
-                'major' => 'AKL',
-                'homeroom_teacher' => 'Budi Santoso'
+                'major_id' => 1,
+                'teacher_id' => 1,
             ],
             [
                 'id' => 2,
                 'name' => 'XII TKJ 1',
                 'grade' => 'XII',
-                'major' => 'TKJ',
-                'homeroom_teacher' => 'Siti Aminah'
-            ]
+                'major_id' => 2,
+                'teacher_id' => 2,
+            ],
         ];
 
         $class = collect($classes)->firstWhere('id', (int) $id);
 
-        if (!$class) {
+        if (! $class) {
             abort(404, 'Kelas tidak ditemukan');
         }
 
         return view('classes.edit', [
             'title' => $title,
             'class' => $class,
+            'majors' => $majors,
+            'teachers' => $teachers,
         ]);
     }
 }
-
-           

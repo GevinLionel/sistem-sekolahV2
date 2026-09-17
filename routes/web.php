@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MajorController;
 use App\Http\Controllers\SchoolClass\CreateController;
 use App\Http\Controllers\SchoolClass\DestroyController;
 use App\Http\Controllers\SchoolClass\EditController;
@@ -9,17 +10,15 @@ use App\Http\Controllers\SchoolClass\StoreController;
 use App\Http\Controllers\SchoolClass\UpdateController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\MajorController;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-//---------------------------------------------------------------------------------------------------------------------------------//(Students)
+// ---------------------------------------------------------------------------------------------------------------------------------//(Students)
 Route::name('students.')->prefix('students')->group(function () {
-    
-    //page
+
+    // page
 
     Route::get('/', [StudentController::class, 'index'])->name('index');
 
@@ -29,7 +28,7 @@ Route::name('students.')->prefix('students')->group(function () {
 
     Route::get('/{id}', [StudentController::class, 'show'])->name('show');
 
-    //logic
+    // logic
 
     Route::put('/{id}', [StudentController::class, 'update'])->name('update');
 
@@ -38,10 +37,10 @@ Route::name('students.')->prefix('students')->group(function () {
     Route::post('/', [StudentController::class, 'store'])->name('store');
 
 });
-//---------------------------------------------------------------------------------------------------------------------------------//(Teachers)
+// ---------------------------------------------------------------------------------------------------------------------------------//(Teachers)
 Route::name('teachers.')->prefix('teachers')->group(function () {
-    
-    //page
+
+    // page
 
     Route::get('/', [TeacherController::class, 'index'])->name('index');
 
@@ -51,7 +50,7 @@ Route::name('teachers.')->prefix('teachers')->group(function () {
 
     Route::get('/{id}', [TeacherController::class, 'show'])->name('show');
 
-    //logic
+    // logic
 
     Route::put('/{id}', [TeacherController::class, 'update'])->name('update');
 
@@ -60,10 +59,10 @@ Route::name('teachers.')->prefix('teachers')->group(function () {
     Route::post('/', [TeacherController::class, 'store'])->name('store');
 
 });
-//---------------------------------------------------------------------------------------------------------------------------------//(School Classes)
+// ---------------------------------------------------------------------------------------------------------------------------------//(School Classes)
 Route::name('classes.')->prefix('classes')->group(function () {
-    
-    //page
+
+    // page
 
     Route::get('/', [IndexController::class, 'index'])->name('index');
 
@@ -71,9 +70,9 @@ Route::name('classes.')->prefix('classes')->group(function () {
 
     Route::get('/{id}/edit', [EditController::class, 'edit'])->name('edit');
 
-     Route::get('/{id}', [ShowController::class, 'show'])->name('show');
+    Route::get('/{id}', [ShowController::class, 'show'])->name('show');
 
-    //logic
+    // logic
 
     Route::put('/{id}', [UpdateController::class, 'update'])->name('update');
 
@@ -83,10 +82,10 @@ Route::name('classes.')->prefix('classes')->group(function () {
 
 });
 
-//---------------------------------------------------------------------------------------------------------------------------------//(Major)
-    Route::resource('majors', MajorController::class);
-
+// ---------------------------------------------------------------------------------------------------------------------------------//(Major)
+Route::resource('majors', MajorController::class);
 
 // Route::get('/students/{id}', function ($id) {
 //     return "menampilkan detail siswa dengan ID: $id";
-// })->name('students.show'); 
+// })->name('students.show');
+

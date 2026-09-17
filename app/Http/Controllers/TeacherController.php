@@ -16,7 +16,7 @@ class TeacherController extends Controller
                 'name' => 'Budi Santoso',
                 'gender' => 'Laki-Laki',
                 'subject' => 'Akuntansi Dasar',
-                'phone' => '081234560001',
+                'phone_number' => '081234560001',
                 'status' => 'Aktif',
             ],
             [
@@ -25,7 +25,7 @@ class TeacherController extends Controller
                 'name' => 'Siti Aminah',
                 'gender' => 'Perempuan',
                 'subject' => 'Jaringan Komputer',
-                'phone' => '081234560002',
+                'phone_number' => '081234560002',
                 'status' => 'Aktif',
             ],
         ];
@@ -47,7 +47,7 @@ class TeacherController extends Controller
                 'name' => 'Budi Santoso',
                 'gender' => 'Laki-Laki',
                 'subject' => 'Akuntansi Dasar',
-                'phone' => '081234560001',
+                'phone_number' => '081234560001',
                 'status' => 'Aktif',
             ],
             [
@@ -56,7 +56,7 @@ class TeacherController extends Controller
                 'name' => 'Siti Aminah',
                 'gender' => 'Perempuan',
                 'subject' => 'Jaringan Komputer',
-                'phone' => '081234560002',
+                'phone_number' => '081234560002',
                 'status' => 'Aktif',
             ],
         ];
@@ -89,7 +89,7 @@ class TeacherController extends Controller
                 'name' => 'Budi Santoso',
                 'gender' => 'Laki-Laki',
                 'subject' => 'Akuntansi Dasar',
-                'phone' => '081234560001',
+                'phone_number' => '081234560001',
                 'status' => 'Aktif',
             ],
             [
@@ -98,7 +98,7 @@ class TeacherController extends Controller
                 'name' => 'Siti Aminah',
                 'gender' => 'Perempuan',
                 'subject' => 'Jaringan Komputer',
-                'phone' => '081234560002',
+                'phone_number' => '081234560002',
                 'status' => 'Aktif',
             ],
         ];
@@ -119,19 +119,20 @@ class TeacherController extends Controller
     public function destroy(string $id)
     {
         $title = 'Sistem Sekolah - Hapus Data Guru';
+
         return "deleting teachers with ID: $id";
     }
 
     public function store(Request $request)
     {
-        $title = "Sistem Sekolah - Menambah";
+        $title = 'Sistem Sekolah - Menambah';
 
         $validated = $request->validate([
             'nip' => 'required|string|max:20',
             'name' => 'required|string|max:255',
             'gender' => 'required|in:Laki-Laki,Perempuan',
             'subject' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'phone_number' => 'required|string|max:20',
             'status' => 'required|in:Aktif,Tidak Aktif',
         ]);
 

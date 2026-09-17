@@ -15,8 +15,8 @@ class StoreController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:50',
             'grade' => 'required|string|max:10',
-            'major' => 'required|string|max:10',
-            'homeroom_teacher' => 'required|string|max:255',
+            'major_id' => 'required|integer',
+            'teacher_id' => 'required|integer',
         ]);
 
         // TODO: persist $validated (array for now, database later)

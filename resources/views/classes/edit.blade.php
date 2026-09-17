@@ -39,22 +39,30 @@
             </div>
 
             <div>
-                <label for="major"
+                <label for="major_id"
                     class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Jurusan</label>
-                <select id="major" name="major"
+                <select id="major_id" name="major_id"
                     class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-                    <option value="AKL" {{ $class['major'] === 'AKL' ? 'selected' : '' }}>AKL</option>
-                    <option value="TKJ" {{ $class['major'] === 'TKJ' ? 'selected' : '' }}>TKJ</option>
-                    <option value="BiD" {{ $class['major'] === 'BiD' ? 'selected' : '' }}>BiD</option>
+                    @foreach ($majors as $major)
+                        <option value="{{ $major['id'] }}" {{ old('major_id', $class['major_id']) == $major['id'] ? 'selected' : '' }}>
+                            {{ $major['code'] }} - {{ $major['name'] }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
 
             <div>
-                <label for="homeroom_teacher"
+                <label for="teacher_id"
                     class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">Wali
                     Kelas</label>
-                <input type="text" id="homeroom_teacher" name="homeroom_teacher" value="{{ $class['homeroom_teacher'] }}"
+                <select id="teacher_id" name="teacher_id"
                     class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+                    @foreach ($teachers as $teacher)
+                        <option value="{{ $teacher['id'] }}" {{ old('teacher_id', $class['teacher_id']) == $teacher['id'] ? 'selected' : '' }}>
+                            {{ $teacher['name'] }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
