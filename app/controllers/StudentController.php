@@ -27,10 +27,7 @@ class StudentController extends Controller
     {
         $this->view('students.create');
     }
-    public function show(string $id)
-    {
-        $this->view('students.show');
-    }   
+
     public function store()
     {
        $studentModel = new Student();
