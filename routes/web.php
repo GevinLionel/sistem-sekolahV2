@@ -24,15 +24,15 @@ Route::name('students.')->prefix('students')->group(function () {
 
     Route::get('/create', [StudentController::class, 'create'])->name('create');
 
-    Route::get('/{id}/edit', [StudentController::class, 'edit'])->name('edit');
+    Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('edit');
 
-    Route::get('/{id}', [StudentController::class, 'show'])->name('show');
+    Route::get('/{student}', [StudentController::class, 'show'])->name('show');
 
     // logic
 
-    Route::put('/{id}', [StudentController::class, 'update'])->name('update');
+    Route::put('/{student}', [StudentController::class, 'update'])->name('update');
 
-    Route::delete('/{id}', [StudentController::class, 'destroy'])->name('destroy');
+    Route::delete('/{student}', [StudentController::class, 'destroy'])->name('destroy');
 
     Route::post('/', [StudentController::class, 'store'])->name('store');
 
@@ -68,15 +68,15 @@ Route::name('classes.')->prefix('classes')->group(function () {
 
     Route::get('/create', [CreateController::class, 'create'])->name('create'); // <-- changed
 
-    Route::get('/{id}/edit', [EditController::class, 'edit'])->name('edit');
+    Route::get('/{student}/edit', [EditController::class, 'edit'])->name('edit');
 
-    Route::get('/{id}', [ShowController::class, 'show'])->name('show');
+    Route::get('/{student}', [ShowController::class, 'show'])->name('show');
 
     // logic
 
-    Route::put('/{id}', [UpdateController::class, 'update'])->name('update');
+    Route::put('/{student}', [UpdateController::class, 'update'])->name('update');
 
-    Route::delete('/{id}', [DestroyController::class, 'destroy'])->name('destroy');
+    Route::delete('/{student}', [DestroyController::class, 'destroy'])->name('destroy');
 
     Route::post('/', [StoreController::class, 'store'])->name('store');
 
@@ -88,4 +88,3 @@ Route::resource('majors', MajorController::class);
 // Route::get('/students/{id}', function ($id) {
 //     return "menampilkan detail siswa dengan ID: $id";
 // })->name('students.show');
-

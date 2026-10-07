@@ -2,82 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Student\StoreRequest;
+use App\Http\Requests\Student\UpdateRequest;
+use App\Models\Student;
 
-//---------------------------------------------------------------------------------------------------------------------------------(Data management)
+// ---------------------------------------------------------------------------------------------------------------------------------(Data management)
 
 class StudentController extends Controller
 {
     public function index()
     {
         $title = 'Sistem Sekolah - Daftar Siswa';
-        $students = [
-            [
-                'id' => 1,
-                'nis' => '1001',
-                'name' => 'Andi',
-                'class' => 'XII TKJ 1',
-                'major' => 'TKJ',
-            ],
-            [
-                'id' => 2,
-                'nis' => '1002',
-                'name' => 'Budi',
-                'class' => 'XII TKJ 2',
-                'major' => 'TKJ',
-            ],
-            [
-                'id' => 3,
-                'nis' => '1003',
-                'name' => 'NIna',
-                'class' => 'XII TKJ 3',
-                'major' => 'AKL',
-            ]
+        $students = Student::select(['id', 'nis', 'name', 'class', 'major'])
+            ->get();
 
-
-        ];
-        
         return view('students.index', [
             'title' => $title,
-            'students' => $students
+            'students' => $students,
         ]);
     }
 
-//---------------------------------------------------------------------------------------------------------------------------------(Student function)
+    // ---------------------------------------------------------------------------------------------------------------------------------(Student function)
 
-    public function show(string $id)
+    public function show(Student $student)
     {
         $title = 'Sistem Sekolah - Detail Siswa';
-
-        $students = [
-            [
-                'id' => 1,
-                'nis' => '1001',
-                'name' => 'Andi',
-                'class' => 'XII TKJ 1',
-                'major' => 'TKJ',
-            ],
-            [
-                'id' => 2,
-                'nis' => '1002',
-                'name' => 'Budi',
-                'class' => 'XII TKJ 2',
-                'major' => 'TKJ',
-            ],
-            [
-                'id' => 3,
-                'nis' => '1003',
-                'name' => 'Nina',
-                'class' => 'XII TKJ 3',
-                'major' => 'AKL',
-            ],
-        ];
-
-        $student = collect($students)->firstWhere('id', (int) $id);
-
-        if (!$student) {
-            abort(404, 'Siswa tidak ditemukan');
-        }
 
         return view('students.show', [
             'title' => $title,
@@ -92,32 +41,12 @@ class StudentController extends Controller
         return view('students.create', [
             'title' => $title,
         ]);
-        
+
     }
 
-   public function edit(string $id)
+    public function edit(Student $student)
     {
         $title = 'Sistem Sekolah - Edit Siswa';
-
-        $students = [
-            ['id' => 1,
-            'nis' => '1001',
-            'name' => 'Andi',
-            'class' => 'XII TKJ 1',
-            'major' => 'TKJ',
-            'gender' => 'L'
-            ],
-            ['id' => 2,
-            'nis' => '1002',
-            'name' => 'Budi',
-            'class' => 'XII TKJ 2',
-            'major' => 'TKJ',
-            'gender' => 'L'
-            ],
-            ['id' => 3, 'nis' => '1003', 'name' => 'Nina', 'class' => 'XII TKJ 3', 'major' => 'AKL', 'gender' => 'P'],
-        ];
-
-        $student = collect($students)->firstWhere('id', (int) $id);
 
         return view('students.edit', [
             'title' => $title,
@@ -125,38 +54,36 @@ class StudentController extends Controller
         ]);
     }
 
-    public function update(string $id)
+    public function update(Student $student, UpdateRequest $request)
     {
-        return "updating students with ID: $id";
+        // validation
+        $validatedRequest = $request->validated();
 
-        return view('students.update', [
-            'title' => $title,
-            'student' => $student,
-        ]);
+        $student->update($validatedRequest);
+
+        // Redirect to the students index page with a success message
+        return redirect()->route('students.index')->with('success', 'Data siswa berhasil diperbarui.');
     }
 
-    public function destroy(string $id)
+    public function destroy(Student $student)
     {
-        $title = "Sistem Sekolah - Hapus Data Siswa";
-        return "deleting students with ID: $id";
+        $title = 'Sistem Sekolah - Hapus Data Siswa';
+
+        $student->delete();
+
+        // Redirect to the students index page with a success message
+        return redirect()->route('students.index')->with('success', 'Data siswa berhasil dihapus.');
     }
 
-    public function store(Request $request)
-{
-    $title = "Sistem Sekolah - Menambah";
+    public function store(StoreRequest $request)
+    {
 
-    $validated = $request->validate([
-        'nis' => 'required|string|max:20',
-        'name' => 'required|string|max:255',
-        'gender' => 'required|in:L,P',
-        'major' => 'required|in:AKL,TKJ,BiD',
-        'class' => 'required|string|max:50',
-    ]);
+        // validation
+        $validatedRequest = $request->validated();
 
-    // TODO: persist $validated somewhere real (see note below)
+        Student::create($validatedRequest);
 
-    return redirect()->route('students.index')->with('success', 'Siswa berhasil ditambahkan.');
-}
-
-    
+        // Redirect to the students index page with a success message
+        return redirect()->route('students.index')->with('success', 'Data siswa berhasil disimpan.');
+    }
 }
