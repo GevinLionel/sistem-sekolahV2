@@ -8,7 +8,7 @@ class TeacherController extends Controller
 {
     public function index()
     {
-        $title = 'Sistem Sekolah - Daftar Guru';
+        $title = "Sistem Sekolah - Daftar Guru";
         $teachers = [
             [
                 'id' => 1,
@@ -16,7 +16,7 @@ class TeacherController extends Controller
                 'name' => 'Budi Santoso',
                 'gender' => 'Laki-Laki',
                 'subject' => 'Akuntansi Dasar',
-                'phone_number' => '081234560001',
+                'phone' => '081234560001',
                 'status' => 'Aktif',
             ],
             [
@@ -25,119 +25,58 @@ class TeacherController extends Controller
                 'name' => 'Siti Aminah',
                 'gender' => 'Perempuan',
                 'subject' => 'Jaringan Komputer',
-                'phone_number' => '081234560002',
-                'status' => 'Aktif',
-            ],
+                'phone' => '081234560002',
+                'status' => 'Tidak Aktif',
+            ]
         ];
+        
 
-        return view('teacher.index', [
+        return view('teachers.index', [
             'title' => $title,
-            'teachers' => $teachers,
+            'teachers' => $teachers
         ]);
+
     }
 
     public function show(string $id)
     {
-        $title = 'Sistem Sekolah - Detail Guru';
-
-        $teachers = [
-            [
-                'id' => 1,
-                'nip' => '198501012024',
-                'name' => 'Budi Santoso',
-                'gender' => 'Laki-Laki',
-                'subject' => 'Akuntansi Dasar',
-                'phone_number' => '081234560001',
-                'status' => 'Aktif',
-            ],
-            [
-                'id' => 2,
-                'nip' => '198703152024',
-                'name' => 'Siti Aminah',
-                'gender' => 'Perempuan',
-                'subject' => 'Jaringan Komputer',
-                'phone_number' => '081234560002',
-                'status' => 'Aktif',
-            ],
-        ];
-
-        $teacher = collect($teachers)->firstWhere('id', (int) $id);
-
-        return view('teacher.show', [
+        $title = "Sistem Sekolah - Detail Guru";
+        
+        return view('teachers.show', [
             'title' => $title,
-            'teacher' => $teacher,
         ]);
     }
 
     public function create()
     {
-        $title = 'Sistem Sekolah - Catat Guru';
-
-        return view('teacher.create', [
+        $title = "Sistem Sekolah - Tambah Guru";
+        
+        return view('teachers.create', [
             'title' => $title,
         ]);
     }
 
     public function edit(string $id)
     {
-        $title = 'Sistem Sekolah - Edit Guru';
-
-        $teachers = [
-            [
-                'id' => 1,
-                'nip' => '198501012024',
-                'name' => 'Budi Santoso',
-                'gender' => 'Laki-Laki',
-                'subject' => 'Akuntansi Dasar',
-                'phone_number' => '081234560001',
-                'status' => 'Aktif',
-            ],
-            [
-                'id' => 2,
-                'nip' => '198703152024',
-                'name' => 'Siti Aminah',
-                'gender' => 'Perempuan',
-                'subject' => 'Jaringan Komputer',
-                'phone_number' => '081234560002',
-                'status' => 'Aktif',
-            ],
-        ];
-
-        $teacher = collect($teachers)->firstWhere('id', (int) $id);
-
-        return view('teacher.edit', [
+        $title = "Sistem Sekolah - Ubah Guru";
+        
+        return view('teachers.edit', [
             'title' => $title,
-            'teacher' => $teacher,
         ]);
+    }
+
+    public function store()
+    {
+        return "Melakukan penambahan data guru";
     }
 
     public function update(string $id)
     {
-        return "updating teachers with ID: $id";
+        return "Melakukan perubahan data guru";
     }
 
     public function destroy(string $id)
     {
-        $title = 'Sistem Sekolah - Hapus Data Guru';
-
-        return "deleting teachers with ID: $id";
-    }
-
-    public function store(Request $request)
-    {
-        $title = 'Sistem Sekolah - Menambah';
-
-        $validated = $request->validate([
-            'nip' => 'required|string|max:20',
-            'name' => 'required|string|max:255',
-            'gender' => 'required|in:Laki-Laki,Perempuan',
-            'subject' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:20',
-            'status' => 'required|in:Aktif,Tidak Aktif',
-        ]);
-
-        // TODO: persist $validated somewhere real (see note below)
-
-        return redirect()->route('teachers.index')->with('success', 'Guru berhasil ditambahkan.');
+        return "Menghapus data guru";
     }
 }

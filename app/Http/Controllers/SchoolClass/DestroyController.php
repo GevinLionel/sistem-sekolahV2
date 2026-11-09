@@ -10,8 +10,8 @@ class DestroyController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function destroy(string $id)
+    public function __invoke(Request $request)
     {
-        return "deleting Class with ID: $id";
+        return "Menghapus data kelas";
     }
 }

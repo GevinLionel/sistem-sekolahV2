@@ -10,17 +10,8 @@ class StoreController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function store(Request $request)
+    public function __invoke(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:50',
-            'grade' => 'required|string|max:10',
-            'major_id' => 'required|integer',
-            'teacher_id' => 'required|integer',
-        ]);
-
-        // TODO: persist $validated (array for now, database later)
-
-        return redirect()->route('classes.index')->with('success', 'Kelas berhasil ditambahkan.');
+        return "Melakukan penambahan data kelas";
     }
 }

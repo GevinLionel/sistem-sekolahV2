@@ -10,13 +10,8 @@ class UpdateController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function update(string $id)
+    public function __invoke(Request $request)
     {
-        return "updating class with ID: $id";
-        
-        return view('classes.update', [
-            'title' => $title,
-            'class' => $class,
-        ]);
+        return "Melakukan perubahan data kelas";
     }
 }
